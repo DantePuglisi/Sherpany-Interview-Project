@@ -16,9 +16,11 @@
 		9363881F2108A030006375C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9363881D2108A030006375C8 /* LaunchScreen.storyboard */; };
 		9363882A2108AF93006375C8 /* MasterViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936388292108AF93006375C8 /* MasterViewTableViewCell.swift */; };
 		9363882D2109F802006375C8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9363882C2109F802006375C8 /* APIManager.swift */; };
+		D3459DFCEA46D5FC7AF54BE1 /* Pods_Sherpany_Interview_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676DAC8E353CAAE9A9221273 /* Pods_Sherpany_Interview_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		676DAC8E353CAAE9A9221273 /* Pods_Sherpany_Interview_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sherpany_Interview_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9363880C2108A02E006375C8 /* Sherpany Interview Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sherpany Interview Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9363880F2108A02E006375C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		936388122108A02E006375C8 /* Sherpany_Interview_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sherpany_Interview_Project.xcdatamodel; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		936388202108A030006375C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		936388292108AF93006375C8 /* MasterViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewTableViewCell.swift; sourceTree = "<group>"; };
 		9363882C2109F802006375C8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		C023A58F94CC0202B373A4F3 /* Pods-Sherpany Interview Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sherpany Interview Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project.debug.xcconfig"; sourceTree = "<group>"; };
+		EE211A8E862851FC32948474 /* Pods-Sherpany Interview Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sherpany Interview Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3459DFCEA46D5FC7AF54BE1 /* Pods_Sherpany_Interview_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,8 @@
 			children = (
 				9363880E2108A02E006375C8 /* Sherpany Interview Project */,
 				9363880D2108A02E006375C8 /* Products */,
+				C3BABC0E5A24BB69E6AD8369 /* Pods */,
+				A21ABA81992BCE458365BD30 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -84,6 +91,23 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		A21ABA81992BCE458365BD30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				676DAC8E353CAAE9A9221273 /* Pods_Sherpany_Interview_Project.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C3BABC0E5A24BB69E6AD8369 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C023A58F94CC0202B373A4F3 /* Pods-Sherpany Interview Project.debug.xcconfig */,
+				EE211A8E862851FC32948474 /* Pods-Sherpany Interview Project.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -91,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 936388232108A030006375C8 /* Build configuration list for PBXNativeTarget "Sherpany Interview Project" */;
 			buildPhases = (
+				EC05FC36E3832A4A256396CD /* [CP] Check Pods Manifest.lock */,
 				936388082108A02E006375C8 /* Sources */,
 				936388092108A02E006375C8 /* Frameworks */,
 				9363880A2108A02E006375C8 /* Resources */,
+				3ED31B4883BA86B999E3DEF0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +175,45 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3ED31B4883BA86B999E3DEF0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC05FC36E3832A4A256396CD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Sherpany Interview Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		936388082108A02E006375C8 /* Sources */ = {
@@ -302,14 +367,12 @@
 		};
 		936388242108A030006375C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C023A58F94CC0202B373A4F3 /* Pods-Sherpany Interview Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Sherpany Interview Project/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DantePuglisi.Sherpany-Interview-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -319,14 +382,12 @@
 		};
 		936388252108A030006375C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EE211A8E862851FC32948474 /* Pods-Sherpany Interview Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Sherpany Interview Project/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DantePuglisi.Sherpany-Interview-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
