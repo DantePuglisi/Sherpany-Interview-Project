@@ -28,7 +28,7 @@
     <elements>
         <element name="Album" positionX="421" positionY="-90" width="128" height="105"/>
         <element name="Photo" positionX="196" positionY="237" width="128" height="118"/>
-        <element name="Post" positionX="142" positionY="-318" width="128" height="105"/>
+        <element name="Post" positionX="142" positionY="-318" width="128" height="103"/>
         <element name="User" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

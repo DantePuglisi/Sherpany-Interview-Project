@@ -17,11 +17,15 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        APIManager.sharedInstance.getData { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.eraseDatabase()
+            strongSelf.insertObjectsToDatabase()
+        }
+        
         navigationItem.leftBarButtonItem = editButtonItem
 
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
-        navigationItem.rightBarButtonItem = addButton
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -35,35 +39,76 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    @objc
-    func insertNewObject(_ sender: Any) {
+    
+    func insertObjectsToDatabase() {
         let context = self.fetchedResultsController.managedObjectContext
-        let newPost = Post(context: context)
-        let newUser = User(context: context)
-             
-        newPost.id = 1
-        newPost.title = "Title 1"
-        newPost.body = "Body 1"
         
-        newUser.email = "test@gmail.com"
-        newUser.id = 1
+        let newUsers = APIManager.sharedInstance.users!.map { currentUser -> User in
+            let newUser = User(context: context)
+            newUser.id = currentUser["id"] as? Int32 ?? 0
+            newUser.email = currentUser["email"] as? String ?? ""
+            return newUser
+        }
         
-        newPost.user = newUser
-
-        // Save the context.
+        let newAlbums = APIManager.sharedInstance.albums!.map { currentAlbum -> Album in
+            let newAlbum = Album(context: context)
+            newAlbum.id = currentAlbum["id"] as? Int32 ?? 0
+            newAlbum.title = currentAlbum["title"] as? String ?? ""
+            
+            if let userId = currentAlbum["userId"] as? Int32 {
+                newAlbum.user = newUsers.first(where: { $0.id == userId })
+            }
+            
+            return newAlbum
+        }
+        
+        APIManager.sharedInstance.photos!.forEach { currentPhoto in
+            let newPhoto = Photo(context: context)
+            newPhoto.id = currentPhoto["id"] as? Int32 ?? 0
+            newPhoto.title = currentPhoto["title"] as? String ?? ""
+            newPhoto.url = currentPhoto["url"] as? String ?? ""
+            newPhoto.thumbnailUrl = currentPhoto["thumbnailUrl"] as? String ?? ""
+            
+            if let albumId = currentPhoto["albumId"] as? Int32 {
+                newPhoto.album = newAlbums.first(where: { $0.id == albumId })
+            }
+        }
+        
+        
+        APIManager.sharedInstance.posts!.forEach { currentPost in
+            if let id = currentPost["id"] as? Int32, let title = currentPost["title"] as? String, let body = currentPost["body"] as? String {
+                let newPost = Post(context: context)
+                
+                newPost.id = id
+                newPost.title = title
+                newPost.body = body
+                
+                if let userId = currentPost["userId"] as? Int32 {
+                    newPost.user = newUsers.first(where: { $0.id == userId })
+                }
+            }
+        }
+        
         do {
             try context.save()
         } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            print("Could not save to database, error: \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    func eraseDatabase() {
+        let context = self.fetchedResultsController.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
+        
+        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try context.execute(batchDeleteRequest)
+            tableView.reloadData()
+        } catch {
+            print("Could not erase database")
         }
     }
 
