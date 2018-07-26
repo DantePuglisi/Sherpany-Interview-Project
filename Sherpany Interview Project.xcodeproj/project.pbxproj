@@ -15,6 +15,7 @@
 		9363881C2108A030006375C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9363881B2108A030006375C8 /* Assets.xcassets */; };
 		9363881F2108A030006375C8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9363881D2108A030006375C8 /* LaunchScreen.storyboard */; };
 		9363882A2108AF93006375C8 /* MasterViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 936388292108AF93006375C8 /* MasterViewTableViewCell.swift */; };
+		9363882D2109F802006375C8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9363882C2109F802006375C8 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		9363881E2108A030006375C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		936388202108A030006375C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		936388292108AF93006375C8 /* MasterViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewTableViewCell.swift; sourceTree = "<group>"; };
+		9363882C2109F802006375C8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +63,10 @@
 			isa = PBXGroup;
 			children = (
 				9363880F2108A02E006375C8 /* AppDelegate.swift */,
+				9363882C2109F802006375C8 /* APIManager.swift */,
 				936388142108A02E006375C8 /* MasterViewController.swift */,
 				936388162108A02E006375C8 /* DetailViewController.swift */,
-				936388292108AF93006375C8 /* MasterViewTableViewCell.swift */,
+				9363882B2109F634006375C8 /* Cell */,
 				936388182108A02E006375C8 /* Main.storyboard */,
 				9363881B2108A030006375C8 /* Assets.xcassets */,
 				9363881D2108A030006375C8 /* LaunchScreen.storyboard */,
@@ -71,6 +74,14 @@
 				936388112108A02E006375C8 /* Sherpany_Interview_Project.xcdatamodeld */,
 			);
 			path = "Sherpany Interview Project";
+			sourceTree = "<group>";
+		};
+		9363882B2109F634006375C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				936388292108AF93006375C8 /* MasterViewTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +155,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9363882D2109F802006375C8 /* APIManager.swift in Sources */,
 				936388102108A02E006375C8 /* AppDelegate.swift in Sources */,
 				936388132108A02E006375C8 /* Sherpany_Interview_Project.xcdatamodeld in Sources */,
 				936388152108A02E006375C8 /* MasterViewController.swift in Sources */,

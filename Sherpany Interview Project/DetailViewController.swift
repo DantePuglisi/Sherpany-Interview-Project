@@ -10,36 +10,39 @@ import UIKit
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var detailDescriptionLabel: UILabel!
-
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = detailItem {
-            if let label = detailDescriptionLabel {
-                //label.text = detail.timestamp!.description
-            }
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    //MARK: - Outlets
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bodyLabel: UILabel!
+    @IBOutlet weak var placeholderLabel: UILabel!
+    
+    //MARK: - Variables
+    var detailItem: Post?
+    
+    //MARK: - Lifecycle
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         configureView()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    var detailItem: Post? {
-        didSet {
-            // Update the view.
-            configureView()
+    
+    //MARK: - UI
+    func configureView() {
+        if let detailItem = detailItem {
+            placeholderLabel.alpha = 0.0
+            if let title = detailItem.title {
+                titleLabel.text = title
+                titleLabel.alpha = 1.0
+            }
+            if let body = detailItem.body {
+                bodyLabel.text = body
+                bodyLabel.alpha = 1.0
+            }
+        } else {
+            placeholderLabel.alpha = 1.0
+            titleLabel.alpha = 0.0
+            bodyLabel.alpha = 0.0
         }
     }
-
 
 }
 
