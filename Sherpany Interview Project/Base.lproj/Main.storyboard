@@ -60,14 +60,45 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jFY-ul-547">
+                                                <rect key="frame" x="36" y="163.5" width="303" height="439.5"/>
+                                                <color key="backgroundColor" red="0.99607843139999996" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="439.5" id="7Tu-u8-MNq"/>
+                                                </constraints>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="bIj-dZ-t3n">
+                                                    <size key="itemSize" width="200" height="200"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bSJ-fs-v1d">
+                                                        <rect key="frame" x="51.5" y="0.0" width="200" height="200"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </view>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="JEX-9P-axG" id="Yv1-Hz-8xM"/>
+                                                </connections>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="jFY-ul-547" firstAttribute="trailing" secondItem="pXF-BM-338" secondAttribute="trailing" id="9gq-lH-QGR"/>
                                             <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="DhC-or-RFI" secondAttribute="centerY" constant="-29.25" id="B8H-bg-pbi"/>
+                                            <constraint firstAttribute="bottom" secondItem="jFY-ul-547" secondAttribute="bottom" id="DFK-CF-kUT"/>
                                             <constraint firstItem="pXF-BM-338" firstAttribute="trailing" secondItem="7FF-2x-5UR" secondAttribute="trailing" id="HWr-jX-1dT"/>
+                                            <constraint firstItem="jFY-ul-547" firstAttribute="top" secondItem="pXF-BM-338" secondAttribute="bottom" constant="40" id="NpR-Vq-vNx"/>
                                             <constraint firstItem="0XM-y9-sOw" firstAttribute="leading" secondItem="DhC-or-RFI" secondAttribute="leading" constant="20" symbolic="YES" id="O9c-9A-jpV"/>
                                             <constraint firstItem="7FF-2x-5UR" firstAttribute="leading" secondItem="DhC-or-RFI" secondAttribute="leading" constant="36" id="Rif-9d-dHP"/>
+                                            <constraint firstItem="jFY-ul-547" firstAttribute="leading" secondItem="pXF-BM-338" secondAttribute="leading" id="Ve1-WJ-4Wp"/>
                                             <constraint firstItem="7FF-2x-5UR" firstAttribute="top" secondItem="DhC-or-RFI" secondAttribute="top" constant="46" id="bvJ-Wv-Cew"/>
+                                            <constraint firstItem="jFY-ul-547" firstAttribute="centerX" secondItem="DhC-or-RFI" secondAttribute="centerX" id="grc-zj-W3d"/>
                                             <constraint firstItem="pXF-BM-338" firstAttribute="leading" secondItem="7FF-2x-5UR" secondAttribute="leading" id="iWU-tD-Rsi"/>
                                             <constraint firstAttribute="trailing" secondItem="0XM-y9-sOw" secondAttribute="trailing" constant="20" symbolic="YES" id="nHA-Vr-Dph"/>
                                             <constraint firstItem="pXF-BM-338" firstAttribute="top" secondItem="7FF-2x-5UR" secondAttribute="bottom" constant="20" id="q5c-96-HbI"/>
@@ -98,6 +129,8 @@
                     <navigationItem key="navigationItem" title="Challenge Accepted!" id="mOI-FS-AaM"/>
                     <connections>
                         <outlet property="bodyLabel" destination="pXF-BM-338" id="ly6-yA-XUy"/>
+                        <outlet property="collectionView" destination="jFY-ul-547" id="Ln4-Hb-fLE"/>
+                        <outlet property="collectionViewHeightConstraint" destination="7Tu-u8-MNq" id="piB-ah-1ON"/>
                         <outlet property="placeholderLabel" destination="0XM-y9-sOw" id="QYK-He-mX2"/>
                         <outlet property="titleLabel" destination="7FF-2x-5UR" id="GJJ-jB-J8c"/>
                     </connections>
@@ -120,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="-856" y="-330"/>
         </scene>
-        <!--Master-->
+        <!--Posts-->
         <scene sceneID="smW-Zh-WAh">
             <objects>
-                <tableViewController title="Master" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" customModule="Sherpany_Interview_Project" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Posts" clearsSelectionOnViewWillAppear="NO" id="7bK-jq-Zjz" customClass="MasterViewController" customModule="Sherpany_Interview_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="r7i-6Z-zg0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

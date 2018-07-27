@@ -18,12 +18,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        APIManager.sharedInstance.getData { [weak self] in
-            guard let strongSelf = self else { return }
-            strongSelf.eraseDatabase()
-            strongSelf.insertObjectsToDatabase()
-        }
-        
         navigationItem.leftBarButtonItem = editButtonItem
 
         if let split = splitViewController {
@@ -38,6 +32,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        
+        APIManager.sharedInstance.getData { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.eraseDatabase()
+            strongSelf.insertObjectsToDatabase()
+        }
     }
     
     func insertObjectsToDatabase() {

@@ -21,21 +21,25 @@ class APIManager {
     func getData(completion: @escaping () -> Void) {
         group = DispatchGroup()
         guard let group = group else { return }
+        
         group.enter()
         getPosts(completion: { response in
             self.posts = response
             group.leave()
         })
+        
         group.enter()
         getUsers(completion: { response in
             self.users = response
             group.leave()
         })
+        
         group.enter()
         getPhotos(completion: { response in
             self.photos = response
             group.leave()
         })
+        
         group.enter()
         getAlbums(completion: { response in
             self.albums = response
