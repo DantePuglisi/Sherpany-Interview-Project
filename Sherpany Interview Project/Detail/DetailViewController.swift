@@ -125,6 +125,7 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
             albumDisplayVC.photos = photosToOpen
         }
         albumDisplayVC.modalPresentationStyle = .overFullScreen
+        albumDisplayVC.modalTransitionStyle = .crossDissolve
         present(albumDisplayVC, animated: true, completion: nil)
     }
     

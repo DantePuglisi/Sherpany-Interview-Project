@@ -27,7 +27,7 @@ class DetailAlbumCollectionViewCell: UICollectionViewCell {
         
         if let photos = cellAlbum.photos?.array as? [Photo] {
             photosCountLabel.text = "\(photos.count) photos"
-            if let firstPhoto = photos.first, let firstPhotoString = firstPhoto.url, let firstPhotoURL = URL(string: firstPhotoString) {
+            if let firstPhoto = photos.first, let firstPhotoString = firstPhoto.thumbnailUrl, let firstPhotoURL = URL(string: firstPhotoString) {
                 photoImageView.af_setImage(withURL: firstPhotoURL, imageTransition: .crossDissolve(0.2), runImageTransitionIfCached: false)
             }
         }
