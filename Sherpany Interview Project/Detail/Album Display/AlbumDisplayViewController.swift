@@ -89,4 +89,8 @@ class AlbumDisplayViewController: UIViewController, UICollectionViewDataSource, 
         
         collectionView.collectionViewLayout.invalidateLayout()
     }
+    
+    @IBAction func closeButtonPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

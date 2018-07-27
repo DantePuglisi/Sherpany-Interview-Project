@@ -264,7 +264,5 @@ class MasterViewController: UIViewController, NSFetchedResultsControllerDelegate
         refreshDataShown()
         showAllPosts()
      }
-    
-
 }
 

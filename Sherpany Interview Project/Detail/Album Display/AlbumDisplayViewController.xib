@@ -62,6 +62,16 @@
                         <constraint firstItem="57G-QC-ZT9" firstAttribute="centerY" secondItem="Zl5-Ia-Ddl" secondAttribute="centerY" multiplier="1.3333" id="hhz-Co-Xqk"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wsh-H1-ReK">
+                    <rect key="frame" x="16" y="36" width="57" height="39"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
+                    <state key="normal" title="Close">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="mOy-P6-Zi9"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -72,6 +82,7 @@
                 <constraint firstItem="pZK-1h-yUr" firstAttribute="leading" secondItem="Zl5-Ia-Ddl" secondAttribute="leading" id="9Hh-QQ-t9v"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Ve-zR-8WL" secondAttribute="trailing" id="Na3-m1-kPt"/>
                 <constraint firstItem="1Ve-zR-8WL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="PmV-sV-RCc"/>
+                <constraint firstItem="wsh-H1-ReK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ST8-Ip-HBm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pZK-1h-yUr" secondAttribute="trailing" id="Tkd-VG-TXw"/>
                 <constraint firstItem="pZK-1h-yUr" firstAttribute="centerX" secondItem="Zl5-Ia-Ddl" secondAttribute="centerX" id="YKn-6V-Ml5"/>
                 <constraint firstItem="pZK-1h-yUr" firstAttribute="trailing" secondItem="Zl5-Ia-Ddl" secondAttribute="trailing" id="Ye6-YS-TPz"/>
@@ -79,6 +90,7 @@
                 <constraint firstItem="pZK-1h-yUr" firstAttribute="bottom" secondItem="Zl5-Ia-Ddl" secondAttribute="bottom" id="k8L-vR-64e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1Ve-zR-8WL" secondAttribute="bottom" id="lCD-FK-AQP"/>
                 <constraint firstItem="pZK-1h-yUr" firstAttribute="top" secondItem="Zl5-Ia-Ddl" secondAttribute="top" id="lfT-rs-FGl"/>
+                <constraint firstItem="wsh-H1-ReK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="onS-Wy-CMT"/>
                 <constraint firstItem="YgU-Ed-LKD" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="qhA-YH-E2M"/>
                 <constraint firstItem="1Ve-zR-8WL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yoL-e5-tmJ"/>
             </constraints>
