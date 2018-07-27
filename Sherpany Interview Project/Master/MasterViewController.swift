@@ -9,17 +9,42 @@
 import UIKit
 import CoreData
 
-class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class MasterViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
+    //MARK: - Outlets
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var loadingBarBackgroundHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var loadingBarWidthConstraint: NSLayoutConstraint!
+    
+    //MARK: - Variables
+    var _fetchedResultsController: NSFetchedResultsController<Post>? = nil
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-
-
+    
+    var allPosts = [Post]()
+    
+    var currentSearch = "" {
+        didSet {
+            if currentSearch != "" {
+                filterDataWithText(currentSearch)
+            } else {
+                showAllPosts()
+            }
+        }
+    }
+    
+    var currentDataToShow = [Post]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.leftBarButtonItem = editButtonItem
-
         if let split = splitViewController {
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
@@ -30,16 +55,44 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
         
-        APIManager.sharedInstance.getData { [weak self] in
+        refreshDataShown()
+        showAllPosts()
+        
+        getPosts()
+    }
+    
+    //MARK: - API call
+    func getPosts() {
+        APIManager.sharedInstance.getData { [weak self] currentProgress in
             guard let strongSelf = self else { return }
-            strongSelf.eraseDatabase()
-            strongSelf.insertObjectsToDatabase()
+            if currentProgress == 1.0 {
+                UIView.animate(withDuration: 0.2, animations: {
+                    strongSelf.loadingBarWidthConstraint.constant = strongSelf.view.frame.width
+                    strongSelf.loadingBarBackgroundHeightConstraint.constant = 0.0
+                    strongSelf.view.layoutIfNeeded()
+                })
+                strongSelf.insertObjectsToDatabase()
+            } else {
+                if strongSelf.loadingBarBackgroundHeightConstraint.constant == 0.0 {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        strongSelf.loadingBarBackgroundHeightConstraint.constant = 6.0
+                        strongSelf.view.layoutIfNeeded()
+                    })
+                }
+                let newProgress = strongSelf.view.frame.width * currentProgress
+                if newProgress > strongSelf.loadingBarWidthConstraint.constant {
+                    UIView.animate(withDuration: 0.2, animations: {
+                        strongSelf.loadingBarWidthConstraint.constant = newProgress
+                        strongSelf.view.layoutIfNeeded()
+                    })
+                }
+            }
         }
     }
     
+    //MARK: - Insertion
     func insertObjectsToDatabase() {
         let context = self.fetchedResultsController.managedObjectContext
         
@@ -77,14 +130,16 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         APIManager.sharedInstance.posts!.forEach { currentPost in
             if let id = currentPost["id"] as? Int32, let title = currentPost["title"] as? String, let body = currentPost["body"] as? String {
-                let newPost = Post(context: context)
-                
-                newPost.id = id
-                newPost.title = title
-                newPost.body = body
-                
-                if let userId = currentPost["userId"] as? Int32 {
-                    newPost.user = newUsers.first(where: { $0.id == userId })
+                if !allPosts.contains(where: { $0.id == id }) {
+                    let newPost = Post(context: context)
+                    
+                    newPost.id = id
+                    newPost.title = title
+                    newPost.body = body
+                    
+                    if let userId = currentPost["userId"] as? Int32 {
+                        newPost.user = newUsers.first(where: { $0.id == userId })
+                    }
                 }
             }
         }
@@ -96,63 +151,40 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             print("Could not save to database, error: \(nserror), \(nserror.userInfo)")
         }
     }
-    
-    func eraseDatabase() {
-        let context = self.fetchedResultsController.managedObjectContext
-        
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Post")
-        
-        let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        
-        do {
-            try context.execute(batchDeleteRequest)
-            tableView.reloadData()
-        } catch {
-            print("Could not erase database")
-        }
-    }
 
-    // MARK: - Segues
-
+    //MARK: - Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
-            let object = fetchedResultsController.object(at: indexPath)
+            let post = currentDataToShow[indexPath.row]
                 let controller = (segue.destination as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.detailItem = post
             }
         }
     }
 
-    // MARK: - Table View
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 0
+    //MARK: - TableView DataSource / Delegate
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentDataToShow.count
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = fetchedResultsController.sections![section]
-        return sectionInfo.numberOfObjects
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MasterViewTableViewCell
-        let post = fetchedResultsController.object(at: indexPath)
+        let post = currentDataToShow[indexPath.row]
         configureCell(cell, withPost: post)
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = fetchedResultsController.managedObjectContext
             context.delete(fetchedResultsController.object(at: indexPath))
+            
+            currentDataToShow.remove(at: indexPath.row)
                 
             do {
                 try context.save()
@@ -166,9 +198,41 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func configureCell(_ cell: MasterViewTableViewCell, withPost post: Post) {
         cell.setupView(withPost: post)
     }
+    
+    func showAllPosts() {
+        currentDataToShow = allPosts
+    }
+    
+    func refreshDataShown() {
+        let context = self.fetchedResultsController.managedObjectContext
+        
+        let request: NSFetchRequest<Post> = Post.fetchRequest()
+        request.returnsObjectsAsFaults = false
+        
+        let sortDescriptor = NSSortDescriptor(key: "id", ascending: true)
+        request.sortDescriptors = [sortDescriptor]
+        
+        do {
+            allPosts = try context.fetch(request)
+        } catch {
+            print("Could not retrieve posts")
+        }
+    }
+    
+    //MARK: - SearchBar Delegate
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        currentSearch = searchText
+    }
 
-    // MARK: - Fetched results controller
-
+    //MARK: - Logic
+    func filterDataWithText(_ text: String) {
+        currentDataToShow = allPosts.filter {
+            guard let title = $0.title, let email = $0.user?.email else { return false }
+            return title.lowercased().contains(text.lowercased()) || email.lowercased().contains(text.lowercased())
+        }
+    }
+    
+    //MARK: - Fetched results controller
     var fetchedResultsController: NSFetchedResultsController<Post> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
@@ -182,6 +246,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
+        self.managedObjectContext!.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        
         let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
@@ -194,50 +260,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
         
         return _fetchedResultsController!
-    }    
-    var _fetchedResultsController: NSFetchedResultsController<Post>? = nil
-
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.beginUpdates()
     }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
-        switch type {
-            case .insert:
-                tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
-            case .delete:
-                tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
-            default:
-                return
-        }
-    }
-
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        switch type {
-            case .insert:
-                tableView.insertRows(at: [newIndexPath!], with: .fade)
-            case .delete:
-                tableView.deleteRows(at: [indexPath!], with: .fade)
-            case .update:
-                configureCell(tableView.cellForRow(at: indexPath!) as! MasterViewTableViewCell, withPost: anObject as! Post)
-            case .move:
-                configureCell(tableView.cellForRow(at: indexPath!) as! MasterViewTableViewCell, withPost: anObject as! Post)
-                tableView.moveRow(at: indexPath!, to: newIndexPath!)
-        }
-    }
-
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        tableView.endUpdates()
-    }
-
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
      
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-         // In the simplest, most efficient, case, reload the table view.
-         tableView.reloadData()
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        refreshDataShown()
+        showAllPosts()
      }
-     */
+    
 
 }
 
