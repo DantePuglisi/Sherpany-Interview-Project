@@ -18,6 +18,10 @@
 		9363882D2109F802006375C8 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9363882C2109F802006375C8 /* APIManager.swift */; };
 		93638833210A9850006375C8 /* DetailAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93638831210A9850006375C8 /* DetailAlbumCollectionViewCell.swift */; };
 		93638834210A9850006375C8 /* DetailAlbumCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93638832210A9850006375C8 /* DetailAlbumCollectionViewCell.xib */; };
+		93638838210B58FC006375C8 /* AlbumDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93638836210B58FC006375C8 /* AlbumDisplayViewController.swift */; };
+		93638839210B58FC006375C8 /* AlbumDisplayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93638837210B58FC006375C8 /* AlbumDisplayViewController.xib */; };
+		9363883E210B599B006375C8 /* AlbumDisplayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9363883C210B599B006375C8 /* AlbumDisplayCollectionViewCell.swift */; };
+		9363883F210B599B006375C8 /* AlbumDisplayCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9363883D210B599B006375C8 /* AlbumDisplayCollectionViewCell.xib */; };
 		D3459DFCEA46D5FC7AF54BE1 /* Pods_Sherpany_Interview_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 676DAC8E353CAAE9A9221273 /* Pods_Sherpany_Interview_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +40,10 @@
 		9363882C2109F802006375C8 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		93638831210A9850006375C8 /* DetailAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		93638832210A9850006375C8 /* DetailAlbumCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailAlbumCollectionViewCell.xib; sourceTree = "<group>"; };
+		93638836210B58FC006375C8 /* AlbumDisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDisplayViewController.swift; sourceTree = "<group>"; };
+		93638837210B58FC006375C8 /* AlbumDisplayViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumDisplayViewController.xib; sourceTree = "<group>"; };
+		9363883C210B599B006375C8 /* AlbumDisplayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDisplayCollectionViewCell.swift; sourceTree = "<group>"; };
+		9363883D210B599B006375C8 /* AlbumDisplayCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumDisplayCollectionViewCell.xib; sourceTree = "<group>"; };
 		C023A58F94CC0202B373A4F3 /* Pods-Sherpany Interview Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sherpany Interview Project.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project.debug.xcconfig"; sourceTree = "<group>"; };
 		EE211A8E862851FC32948474 /* Pods-Sherpany Interview Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sherpany Interview Project.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sherpany Interview Project/Pods-Sherpany Interview Project.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				936388162108A02E006375C8 /* DetailViewController.swift */,
+				9363883A210B5902006375C8 /* Album Display */,
 				93638835210A985B006375C8 /* Cell */,
 			);
 			path = Detail;
@@ -125,6 +134,25 @@
 			children = (
 				93638831210A9850006375C8 /* DetailAlbumCollectionViewCell.swift */,
 				93638832210A9850006375C8 /* DetailAlbumCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		9363883A210B5902006375C8 /* Album Display */ = {
+			isa = PBXGroup;
+			children = (
+				93638836210B58FC006375C8 /* AlbumDisplayViewController.swift */,
+				93638837210B58FC006375C8 /* AlbumDisplayViewController.xib */,
+				9363883B210B5988006375C8 /* Cell */,
+			);
+			path = "Album Display";
+			sourceTree = "<group>";
+		};
+		9363883B210B5988006375C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9363883C210B599B006375C8 /* AlbumDisplayCollectionViewCell.swift */,
+				9363883D210B599B006375C8 /* AlbumDisplayCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -208,6 +236,8 @@
 			files = (
 				9363881F2108A030006375C8 /* LaunchScreen.storyboard in Resources */,
 				9363881C2108A030006375C8 /* Assets.xcassets in Resources */,
+				93638839210B58FC006375C8 /* AlbumDisplayViewController.xib in Resources */,
+				9363883F210B599B006375C8 /* AlbumDisplayCollectionViewCell.xib in Resources */,
 				9363881A2108A02E006375C8 /* Main.storyboard in Resources */,
 				93638834210A9850006375C8 /* DetailAlbumCollectionViewCell.xib in Resources */,
 			);
@@ -263,6 +293,8 @@
 			files = (
 				9363882D2109F802006375C8 /* APIManager.swift in Sources */,
 				936388102108A02E006375C8 /* AppDelegate.swift in Sources */,
+				93638838210B58FC006375C8 /* AlbumDisplayViewController.swift in Sources */,
+				9363883E210B599B006375C8 /* AlbumDisplayCollectionViewCell.swift in Sources */,
 				936388132108A02E006375C8 /* Sherpany_Interview_Project.xcdatamodeld in Sources */,
 				936388152108A02E006375C8 /* MasterViewController.swift in Sources */,
 				936388172108A02E006375C8 /* DetailViewController.swift in Sources */,
@@ -414,7 +446,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Sherpany Interview Project/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DantePuglisi.Sherpany-Interview-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -429,7 +464,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = "Sherpany Interview Project/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.DantePuglisi.Sherpany-Interview-Project";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

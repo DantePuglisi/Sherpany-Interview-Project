@@ -119,6 +119,15 @@ class DetailViewController: UIViewController, UICollectionViewDataSource, UIColl
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let albumDisplayVC = AlbumDisplayViewController(nibName: "AlbumDisplayViewController", bundle: nil)
+        if let photosToOpen = detailAlbums?[indexPath.row].photos?.array as? [Photo] {
+            albumDisplayVC.photos = photosToOpen
+        }
+        albumDisplayVC.modalPresentationStyle = .overFullScreen
+        present(albumDisplayVC, animated: true, completion: nil)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: CELL_SIZE, height: CELL_SIZE)
     }

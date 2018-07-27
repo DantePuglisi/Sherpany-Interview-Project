@@ -19,7 +19,6 @@ class MasterViewController: UIViewController, NSFetchedResultsControllerDelegate
     @IBOutlet weak var loadingBarWidthConstraint: NSLayoutConstraint!
     
     //MARK: - Variables
-    var _fetchedResultsController: NSFetchedResultsController<Post>? = nil
     var detailViewController: DetailViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     
@@ -49,8 +48,6 @@ class MasterViewController: UIViewController, NSFetchedResultsControllerDelegate
             let controllers = split.viewControllers
             detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
         }
-        
-        self.title = "Posts"
         
     }
 
@@ -233,6 +230,7 @@ class MasterViewController: UIViewController, NSFetchedResultsControllerDelegate
     }
     
     //MARK: - Fetched results controller
+    var _fetchedResultsController: NSFetchedResultsController<Post>? = nil
     var fetchedResultsController: NSFetchedResultsController<Post> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!

@@ -38,13 +38,6 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mi2-i5-wUA">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail view content goes here" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
-                                        <rect key="frame" x="74.5" y="291" width="226.5" height="20.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DhC-or-RFI">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
@@ -97,18 +90,25 @@
                                 <constraints>
                                     <constraint firstItem="DhC-or-RFI" firstAttribute="leading" secondItem="mi2-i5-wUA" secondAttribute="leading" id="1rS-CS-r4S"/>
                                     <constraint firstAttribute="bottom" secondItem="DhC-or-RFI" secondAttribute="bottom" id="8xM-L8-Q0g"/>
-                                    <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="mi2-i5-wUA" secondAttribute="centerY" id="DIH-PC-sVD"/>
                                     <constraint firstItem="DhC-or-RFI" firstAttribute="height" secondItem="mi2-i5-wUA" secondAttribute="height" priority="250" id="Je3-nc-9dL"/>
                                     <constraint firstAttribute="trailing" secondItem="DhC-or-RFI" secondAttribute="trailing" id="JhF-vM-xDb"/>
-                                    <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="mi2-i5-wUA" secondAttribute="centerX" id="V1s-PX-mmS"/>
                                     <constraint firstItem="DhC-or-RFI" firstAttribute="top" secondItem="mi2-i5-wUA" secondAttribute="top" id="b5l-9m-y3L"/>
                                     <constraint firstItem="DhC-or-RFI" firstAttribute="width" secondItem="mi2-i5-wUA" secondAttribute="width" id="jZK-xz-cVh"/>
                                 </constraints>
                             </scrollView>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Tap a Post to view its content" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="0XM-y9-sOw">
+                                <rect key="frame" x="75.5" y="323" width="224" height="20.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="bottom" secondItem="mi2-i5-wUA" secondAttribute="bottom" id="0vs-XF-zLS"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerY" secondItem="svH-Pt-448" secondAttribute="centerY" id="8FY-qc-Ogr"/>
+                            <constraint firstItem="0XM-y9-sOw" firstAttribute="centerX" secondItem="svH-Pt-448" secondAttribute="centerX" id="IVq-dh-uPf"/>
                             <constraint firstItem="mi2-i5-wUA" firstAttribute="leading" secondItem="VUw-jc-0yf" secondAttribute="leading" id="VEL-zM-Jt1"/>
                             <constraint firstItem="VUw-jc-0yf" firstAttribute="trailing" secondItem="mi2-i5-wUA" secondAttribute="trailing" id="h2K-Ax-3MH"/>
                             <constraint firstItem="mi2-i5-wUA" firstAttribute="top" secondItem="VUw-jc-0yf" secondAttribute="top" id="p4V-V2-iPQ"/>
